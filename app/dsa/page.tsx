@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { dsaTopics } from '@/lib/data';
 import { ArrowLeft, BookMarked } from 'lucide-react';
+import TopicProgressCard from '@/components/TopicProgressCard';
 
 export default function DSAPage() {
   return (
@@ -18,17 +19,9 @@ export default function DSAPage() {
         <p className="opacity-70 text-lg max-w-2xl">Select a core topic to begin diving deep into algorithms and structural concepts.</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-12">
         {Object.values(dsaTopics).map((topic) => (
-          <Link href={`/dsa/${topic.id}`} key={topic.id} className="block group">
-            <div className="nm-flat hover:nm-button rounded-[2.5rem] p-8 transition-all duration-300 h-full flex flex-col group-hover:scale-[1.02]">
-              <h3 className="text-2xl font-bold text-[var(--heading-color)] mb-3">{topic.title}</h3>
-              <p className="opacity-70 text-sm flex-1 leading-relaxed">{topic.description}</p>
-              <div className="mt-8 flex items-center text-sm font-bold text-orange-500 group-hover:text-orange-400">
-                Start Practicing <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
-              </div>
-            </div>
-          </Link>
+          <TopicProgressCard key={topic.id} topic={topic} />
         ))}
       </div>
     </div>
