@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--bg-color);
+  --color-foreground: var(--text-color);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  /* Light Theme Neumorphism */
+  --bg-color: #E0E5EC;
+  --text-color: #4a5568;
+  --heading-color: #2d3748;
+  --nm-shadow: 8px 8px 16px #a3b1c6, -8px -8px 16px #ffffff;
+  --nm-shadow-sm: 4px 4px 8px #a3b1c6, -4px -4px 8px #ffffff;
+  --nm-inset: inset 8px 8px 16px #a3b1c6, inset -8px -8px 16px #ffffff;
+  --nm-inset-sm: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff;
+  --nm-active: inset 2px 2px 5px #a3b1c6, inset -2px -2px 5px #ffffff;
+}
+
+:root[class~="dark"] {
+  /* Dark Theme Neumorphism */
+  --bg-color: #212429;
+  --text-color: #a0aec0;
+  --heading-color: #e2e8f0;
+  --nm-shadow: 8px 8px 16px #16181b, -8px -8px 16px #2c3037;
+  --nm-shadow-sm: 4px 4px 8px #16181b, -4px -4px 8px #2c3037;
+  --nm-inset: inset 8px 8px 16px #16181b, inset -8px -8px 16px #2c3037;
+  --nm-inset-sm: inset 4px 4px 8px #16181b, inset -4px -4px 8px #2c3037;
+  --nm-active: inset 2px 2px 5px #16181b, inset -2px -2px 5px #2c3037;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Neumorphic Utilities */
+.nm-flat {
+  box-shadow: var(--nm-shadow);
+  background-color: var(--bg-color);
+}
+.nm-flat-sm {
+  box-shadow: var(--nm-shadow-sm);
+  background-color: var(--bg-color);
+}
+.nm-inset {
+  box-shadow: var(--nm-inset);
+  background-color: var(--bg-color);
+}
+.nm-inset-sm {
+  box-shadow: var(--nm-inset-sm);
+  background-color: var(--bg-color);
+}
+.nm-button {
+  box-shadow: var(--nm-shadow-sm);
+  background-color: var(--bg-color);
+  transition: all 0.2s ease;
+}
+.nm-button:active {
+  box-shadow: var(--nm-active);
+}
