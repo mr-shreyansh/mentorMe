@@ -2,44 +2,30 @@
 
 import Link from 'next/link';
 import { useProgress } from './ProgressProvider';
-import { TopicData } from '@/lib/data';
-import { useEffect, useState } from 'react';
+import { DsaTopicGroup } from '@/lib/dsa';
+import { useMemo } from 'react';
 
-export default function TopicProgressCard({ topic }: { topic: TopicData }) {
-  const { completed, isMounted } = useProgress();
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    if (!isMounted) return;
-
-    const totalProblems = topic.subtopics.reduce(
-      (acc, sub) => acc + sub.examples.length, 
-      0
-    );
-    
-    if (totalProblems === 0) {
-      setProgress(0);
-      return;
+export default function TopicProgressCard({ topic }: { topic: DsaTopicGroup }) {
+  const { progress, isMounted } = useProgress();
+  const completionPercentage = useMemo(() => {
+    if (!isMounted || topic.totalProblems === 0) {
+      return 0;
     }
 
-    const completedCount = topic.subtopics.reduce(
-      (acc, sub) => acc + sub.examples.filter(ex => !!completed[ex.id]).length,
-      0
-    );
-
-    setProgress(Math.round((completedCount / totalProblems) * 100));
-  }, [completed, topic, isMounted]);
+    const completedCount = topic.problemIds.filter((problemId) => !!progress[problemId]?.date).length;
+    return Math.round((completedCount / topic.totalProblems) * 100);
+  }, [isMounted, progress, topic.problemIds, topic.totalProblems]);
 
   return (
     <Link href={`/dsa/${topic.id}`} className="block group relative">
       <div className="nm-flat hover:nm-button rounded-[2.5rem] p-8 transition-all duration-500 h-full flex flex-col group-hover:scale-[1.02] overflow-hidden relative">
         
         {/* Particle Fill Layer */}
-        {isMounted && progress > 0 && (
+        {isMounted && completionPercentage > 0 && (
           <div 
             className="absolute bottom-0 left-0 w-full transition-all duration-1000 ease-out z-0 opacity-20 dark:opacity-10"
             style={{ 
-              height: `${progress}%`,
+              height: `${completionPercentage}%`,
               background: `
                 radial-gradient(circle at 20% 30%, #f97316 2px, transparent 0),
                 radial-gradient(circle at 70% 10%, #f97316 3px, transparent 0),
@@ -57,9 +43,9 @@ export default function TopicProgressCard({ topic }: { topic: TopicData }) {
         <div className="relative z-10 flex-1 flex flex-col">
           <div className="flex justify-between items-start mb-4">
             <h3 className="text-2xl font-bold text-(--heading-color)">{topic.title}</h3>
-            {isMounted && progress > 0 && (
+            {isMounted && completionPercentage > 0 && (
               <span className="text-xs font-black text-orange-500 nm-inset-sm px-3 py-1 rounded-full">
-                {progress}%
+                {completionPercentage}%
               </span>
             )}
           </div>

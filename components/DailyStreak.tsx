@@ -5,18 +5,18 @@ import { Flame } from 'lucide-react';
 import { useMemo } from 'react';
 
 export default function DailyStreak() {
-  const { completed, isMounted } = useProgress();
+  const { progress, isMounted } = useProgress();
 
   const streak = useMemo(() => {
     if (!isMounted) return 0;
     
-    const dates = Object.values(completed)
-      .map(d => new Date(d).getTime())
-      .sort((a, b) => b - a);
+    const activeDates = Object.values(progress)
+      .filter(p => !!p.date)
+      .map(p => p.date as string);
       
-    if (dates.length === 0) return 0;
+    if (activeDates.length === 0) return 0;
 
-    const uniqueDates = Array.from(new Set(Object.values(completed))).sort((a, b) => b.localeCompare(a));
+    const uniqueDates = Array.from(new Set(activeDates)).sort((a, b) => b.localeCompare(a));
     
     const today = new Date();
     const todayStr = today.toISOString().split('T')[0];
@@ -45,7 +45,7 @@ export default function DailyStreak() {
     }
     
     return currentStreak;
-  }, [completed, isMounted]);
+  }, [progress, isMounted]);
 
   if (!isMounted) return <div className="h-20 w-48 nm-flat rounded-full animate-pulse"></div>;
 

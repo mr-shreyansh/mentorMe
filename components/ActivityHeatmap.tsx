@@ -13,14 +13,16 @@ interface Activity {
 }
 
 export default function ActivityHeatmap() {
-  const { completed, isMounted } = useProgress();
+  const { progress, isMounted } = useProgress();
   const { theme } = useTheme();
 
   if (!isMounted) return <div className="h-64 nm-flat rounded-[3rem] animate-pulse"></div>;
 
   const dailyCounts: Record<string, number> = {};
-  Object.values(completed).forEach((dateStr) => {
-    dailyCounts[dateStr] = (dailyCounts[dateStr] || 0) + 1;
+  Object.values(progress).forEach((p) => {
+    if (p.date) {
+      dailyCounts[p.date] = (dailyCounts[p.date] || 0) + 1;
+    }
   });
 
   const today = new Date();
