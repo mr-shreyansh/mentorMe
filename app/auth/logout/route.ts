@@ -1,6 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
-import { toAppUrl } from "@/lib/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
@@ -42,7 +41,7 @@ async function handleLogout(request: NextRequest) {
 
   await supabase.auth.signOut();
 
-  const redirectResponse = NextResponse.redirect(toAppUrl(nextPath, request));
+  const redirectResponse = NextResponse.redirect(new URL(nextPath, request.url));
 
   response.cookies.getAll().forEach((cookie) => {
     redirectResponse.cookies.set(cookie.name, cookie.value);

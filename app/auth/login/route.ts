@@ -1,6 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
-import { getAppBaseUrl, toAppUrl } from "@/lib/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
@@ -15,12 +14,11 @@ function getSafeNextPath(nextParam: string | null) {
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
-  const appBaseUrl = getAppBaseUrl(request);
   const provider = requestUrl.searchParams.get("provider") ?? "github";
   const nextPath = getSafeNextPath(requestUrl.searchParams.get("next"));
 
   if (provider !== "github") {
-    return NextResponse.redirect(toAppUrl("/?authError=unsupported_provider", request));
+    return NextResponse.redirect(new URL("/?authError=unsupported_provider", request.url));
   }
 
   let response = NextResponse.next({
@@ -49,12 +47,12 @@ export async function GET(request: NextRequest) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
-      redirectTo: `${appBaseUrl}/auth/callback?next=${encodeURIComponent(nextPath)}`,
+      redirectTo: `${requestUrl.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
     },
   });
 
   if (error || !data.url) {
-    return NextResponse.redirect(toAppUrl("/?authError=oauth_start_failed", request));
+    return NextResponse.redirect(new URL("/?authError=oauth_start_failed", request.url));
   }
 
   const redirectResponse = NextResponse.redirect(data.url);

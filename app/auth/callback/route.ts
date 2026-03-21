@@ -1,7 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { type NextRequest, NextResponse } from "next/server";
-import { toAppUrl } from "@/lib/url";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
@@ -21,7 +20,7 @@ export async function GET(request: NextRequest) {
   const nextPath = getSafeNextPath(requestUrl.searchParams.get("next"));
 
   if (!code) {
-    return NextResponse.redirect(toAppUrl("/?authError=missing_code", request));
+    return NextResponse.redirect(new URL("/?authError=missing_code", request.url));
   }
 
   let response = NextResponse.next({
@@ -50,7 +49,8 @@ export async function GET(request: NextRequest) {
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
-    return NextResponse.redirect(toAppUrl("/?authError=oauth_callback_failed", request));
+    console.error("OAuth callback exchange failed", error);
+    return NextResponse.redirect(new URL("/?authError=oauth_callback_failed", request.url));
   }
 
   const {
@@ -113,7 +113,7 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  const redirectResponse = NextResponse.redirect(toAppUrl(nextPath, request));
+  const redirectResponse = NextResponse.redirect(new URL(nextPath, request.url));
 
   response.cookies.getAll().forEach((cookie) => {
     redirectResponse.cookies.set(cookie.name, cookie.value);
