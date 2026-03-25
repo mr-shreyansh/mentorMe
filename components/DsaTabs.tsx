@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, RefreshCw, Loader2 } from 'lucide-react';
 import ProblemCheckbox from '@/components/ProblemCheckbox';
+import { useProgress } from '@/components/ProgressProvider';
+import { syncLeetcodeProblems } from '@/app/actions/leetcode';
 import type { DsaTopicGroup } from '@/lib/dsa';
 
 type DsaTabsProps = {
@@ -11,7 +13,29 @@ type DsaTabsProps = {
 
 export default function DsaTabs({ topics }: DsaTabsProps) {
   const [activeTopicId, setActiveTopicId] = useState<string>(topics[0]?.id ?? '');
+  const [syncing, setSyncing] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const { refreshProgress } = useProgress();
   const activeTopic = topics.find((topic) => topic.id === activeTopicId) ?? topics[0];
+
+  const handleSync = async () => {
+    setSyncing(true);
+    setSyncStatus(null);
+    try {
+      const result = await syncLeetcodeProblems();
+      if (result.success) {
+        setSyncStatus({ type: 'success', message: result.message ?? `Synced! ${result.solved} problems solved.` });
+        await refreshProgress();
+      } else {
+        setSyncStatus({ type: 'error', message: result.error ?? 'Sync failed.' });
+      }
+    } catch {
+      setSyncStatus({ type: 'error', message: 'An unexpected error occurred.' });
+    } finally {
+      setSyncing(false);
+      setTimeout(() => setSyncStatus(null), 5000);
+    }
+  };
 
   if (!activeTopic) {
     return (
@@ -24,7 +48,7 @@ export default function DsaTabs({ topics }: DsaTabsProps) {
   return (
     <div className="space-y-8 pb-12">
       <div className="nm-flat rounded-[2.5rem] p-4 md:p-5">
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 items-center">
           {topics.map((topic) => (
             <button
               key={topic.id}
@@ -39,7 +63,31 @@ export default function DsaTabs({ topics }: DsaTabsProps) {
               {topic.title}
             </button>
           ))}
+
+          <button
+            type="button"
+            onClick={handleSync}
+            disabled={syncing}
+            className="ml-auto px-5 py-2 rounded-lg text-sm font-bold transition-all nm-button text-orange-500 hover:text-orange-400 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            {syncing ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <RefreshCw className="w-4 h-4" />
+            )}
+            {syncing ? 'Syncing...' : 'Sync LeetCode'}
+          </button>
         </div>
+
+        {syncStatus && (
+          <div className={`mt-3 px-4 py-2 rounded-lg text-sm font-medium ${
+            syncStatus.type === 'success'
+              ? 'nm-inset-sm text-emerald-500'
+              : 'nm-inset-sm text-rose-500'
+          }`}>
+            {syncStatus.message}
+          </div>
+        )}
       </div>
 
       <section className="nm-flat rounded-[3rem] p-8 md:p-12">
