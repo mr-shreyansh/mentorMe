@@ -30,7 +30,7 @@ export default function DsaTabs({ topics }: DsaTabsProps) {
               key={topic.id}
               type="button"
               onClick={() => setActiveTopicId(topic.id)}
-              className={`px-4 py-2 rounded-2xl text-sm font-bold transition-all ${
+              className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
                 activeTopic.id === topic.id
                   ? 'nm-flat text-orange-500'
                   : 'nm-inset-sm text-foreground opacity-70 hover:opacity-100'
@@ -72,7 +72,7 @@ export default function DsaTabs({ topics }: DsaTabsProps) {
                   ))}
                 </div>
               ) : (
-                <div className="flex-1 rounded-4xl nm-inset p-10 flex flex-col items-center justify-center text-center">
+                <div className="flex-1 rounded-lg nm-inset p-10 flex flex-col items-center justify-center text-center">
                   <p className="opacity-80 font-bold text-(--heading-color)">No examples added yet.</p>
                   <p className="opacity-50 text-sm mt-2 max-w-xs">Problems will appear here when this subtype has data.</p>
                 </div>

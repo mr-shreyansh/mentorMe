@@ -26,7 +26,7 @@ export default function CodeSnippet({ code }: { code: string }) {
 
   if (!mounted) {
     return (
-      <div className="text-sm font-mono overflow-hidden nm-inset rounded-4xl p-4 min-h-[100px] animate-pulse">
+      <div className="text-sm font-mono overflow-hidden nm-inset rounded-lg p-4 min-h-[100px] animate-pulse">
         <div className="blur-md opacity-20">{code}</div>
       </div>
     );
@@ -37,7 +37,7 @@ export default function CodeSnippet({ code }: { code: string }) {
 
   return (
     <div className="relative group p-1">
-      <div className={`text-sm font-mono overflow-hidden nm-inset rounded-4xl p-4 transition-all duration-700 ${!show ? 'blur-md select-none' : ''}`}>
+      <div className={`text-sm font-mono overflow-hidden nm-inset rounded-lg p-4 transition-all duration-700 ${!show ? 'blur-md select-none' : ''}`}>
         <SyntaxHighlighter
           language="python"
           style={syntaxStyle}
@@ -66,7 +66,7 @@ export default function CodeSnippet({ code }: { code: string }) {
             )}
             <button 
               onClick={handleCopy}
-              className="nm-button p-2.5 rounded-xl text-orange-500 hover:scale-110 active:scale-95 transition-all flex items-center justify-center"
+              className="nm-button p-2.5 rounded-md text-orange-500 hover:scale-110 active:scale-95 transition-all flex items-center justify-center"
               title="Copy code"
             >
               {copied ? <Check size={16} className="text-emerald-500" /> : <Copy size={16} />}
@@ -79,7 +79,7 @@ export default function CodeSnippet({ code }: { code: string }) {
             e.stopPropagation();
             setShow(!show);
           }}
-          className="nm-button p-2.5 rounded-xl text-orange-500 hover:scale-110 active:scale-95 transition-all flex items-center justify-center"
+          className="nm-button p-2.5 rounded-md text-orange-500 hover:scale-110 active:scale-95 transition-all flex items-center justify-center"
           title={show ? "Hide code" : "Show code"}
         >
           {show ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -88,7 +88,7 @@ export default function CodeSnippet({ code }: { code: string }) {
 
       {!show && (
         <div 
-          className="absolute inset-0 cursor-pointer rounded-4xl z-10 flex items-center justify-center" 
+          className="absolute inset-0 cursor-pointer rounded-lg z-10 flex items-center justify-center" 
           onClick={() => setShow(true)}
         >
           <div className="nm-flat rounded-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

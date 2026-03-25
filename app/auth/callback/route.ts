@@ -91,7 +91,7 @@ export async function GET(request: NextRequest) {
             .from("users")
             .upsert(
               {
-                id: githubId,
+                id: user.id, // Use the Auth UUID as the primary key
                 created_at: new Date().toISOString(),
                 email: user.email ?? githubMetadata.email ?? null,
                 full_name: githubMetadata.full_name ?? null,

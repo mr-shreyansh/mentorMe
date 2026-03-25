@@ -52,7 +52,7 @@ export default function LoginButton({
             onClick={() => setOpen(false)}
           />
 
-          <div className="relative z-10 w-full max-w-md rounded-4xl p-6 md:p-8 nm-flat">
+          <div className="relative z-10 w-full max-w-md rounded-lg p-6 md:p-8 nm-flat">
             <button
               type="button"
               aria-label="Close"
@@ -70,7 +70,7 @@ export default function LoginButton({
             <div className="mt-6 space-y-3">
               <a
                 href={`/auth/login?provider=github&next=${encodeURIComponent(returnTo)}`}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3 nm-button font-semibold text-(--heading-color)"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 nm-button font-semibold text-(--heading-color)"
               >
                 <Github className="h-5 w-5" />
                 Continue with GitHub
@@ -79,7 +79,7 @@ export default function LoginButton({
               <button
                 type="button"
                 disabled
-                className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-2xl px-4 py-3 nm-flat-sm opacity-60"
+                className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg px-4 py-3 nm-flat-sm opacity-60"
               >
                 Google (coming soon)
               </button>

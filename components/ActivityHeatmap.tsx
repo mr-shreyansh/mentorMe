@@ -63,7 +63,7 @@ export default function ActivityHeatmap() {
   return (
     <div className="nm-flat rounded-[3rem] p-8 md:p-12 relative overflow-hidden">
       <h2 className="text-2xl font-bold mb-8 flex items-center text-[var(--heading-color)]">
-        <span className="nm-inset-sm text-orange-500 p-3 rounded-2xl mr-5">
+        <span className="nm-inset-sm text-orange-500 p-3 rounded-lg mr-5">
           <Flame className="w-6 h-6" />
         </span>
         Consistency Progress

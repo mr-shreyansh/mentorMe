@@ -13,7 +13,7 @@ export default async function DSAPage() {
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Dashboard
         </Link>
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-(--heading-color) mb-4 flex items-center">
-          <span className="nm-inset-sm text-orange-500 p-4 rounded-4xl mr-5">
+          <span className="nm-inset-sm text-orange-500 p-4 rounded-lg mr-5">
             <BookMarked className="w-8 h-8" />
           </span>
           DSA Practice

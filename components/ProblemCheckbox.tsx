@@ -68,7 +68,7 @@ export default function ProblemCheckbox({
     return () => window.removeEventListener('keydown', onEscape);
   }, [isSolutionOpen]);
 
-  if (!isMounted) return <div className="h-26 nm-inset-sm rounded-3xl mb-4 animate-pulse"></div>;
+  if (!isMounted) return <div className="h-26 nm-inset-sm rounded-md mb-4 animate-pulse"></div>;
 
   const difficultyColors = {
     easy: 'text-emerald-500',
@@ -79,7 +79,7 @@ export default function ProblemCheckbox({
   return (
     <div 
       id={`problem-${id}`} 
-      className={`group flex items-start p-5 rounded-3xl transition-all duration-300 mb-4 border-2 ${
+      className={`group flex items-start p-5 rounded-md transition-all duration-300 mb-4 border-2 ${
         isRevisit 
           ? 'bg-amber-500/5 border-amber-400/30!' 
           : 'border-transparent'
@@ -87,7 +87,7 @@ export default function ProblemCheckbox({
     >
       <button 
         onClick={() => toggleProblem(id)} 
-        className={`shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-300 focus:outline-none mt-1 ${
+        className={`shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 focus:outline-none mt-1 ${
           isChecked ? 'nm-flat text-emerald-500' : 'nm-inset-sm text-foreground opacity-30 group-hover:opacity-60'
         }`}
         aria-label={isChecked ? "Mark as uncompleted" : "Mark as completed"}
@@ -110,7 +110,7 @@ export default function ProblemCheckbox({
 
         <div className="flex items-center gap-4 shrink-0">
           {/* Difficulty Selectors */}
-          <div className="flex items-center nm-inset-sm p-0.5 rounded-xl h-8">
+          <div className="flex items-center nm-inset-sm p-0.5 rounded-md h-8">
             {(['easy', 'medium', 'hard'] as Difficulty[]).map((d) => (
               <button
                 key={d}
@@ -150,7 +150,7 @@ export default function ProblemCheckbox({
         </div>
 
         {isExpanded && (
-          <div className="nm-inset-sm rounded-2xl p-4 space-y-4">
+          <div className="nm-inset-sm rounded-lg p-4 space-y-4">
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-[10px] uppercase font-black tracking-wider opacity-60">Platform</span>
               <span className="text-xs font-semibold nm-flat px-2.5 py-1 rounded-full">{platform}</span>
@@ -199,7 +199,7 @@ export default function ProblemCheckbox({
               <button
                 onClick={() => setRevealedHintsCount((count) => Math.min(count + 1, hints.length))}
                 disabled={revealedHintsCount >= hints.length || hints.length === 0}
-                className="h-9 px-4 rounded-xl nm-flat disabled:opacity-40 disabled:cursor-not-allowed text-xs font-bold uppercase tracking-wide flex items-center gap-2"
+                className="h-9 px-4 rounded-md nm-flat disabled:opacity-40 disabled:cursor-not-allowed text-xs font-bold uppercase tracking-wide flex items-center gap-2"
               >
                 <Lightbulb className="w-3 h-3" />
                 {revealedHintsCount >= hints.length ? 'All Hints Revealed' : 'Show Next Hint'}
@@ -210,7 +210,7 @@ export default function ProblemCheckbox({
               <button
                 onClick={() => setIsSolutionOpen(true)}
                 disabled={!hasSolution}
-                className="h-9 px-4 rounded-xl nm-flat disabled:opacity-40 disabled:cursor-not-allowed text-xs font-bold uppercase tracking-wide"
+                className="h-9 px-4 rounded-md nm-flat disabled:opacity-40 disabled:cursor-not-allowed text-xs font-bold uppercase tracking-wide"
               >
                 View Solution
               </button>
@@ -225,7 +225,7 @@ export default function ProblemCheckbox({
           onClick={() => setIsSolutionOpen(false)}
         >
           <div
-            className="w-full max-w-2xl nm-flat rounded-3xl p-6 md:p-8"
+            className="w-full max-w-2xl nm-flat rounded-md p-6 md:p-8"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-4 mb-4">
@@ -235,14 +235,14 @@ export default function ProblemCheckbox({
               </div>
               <button
                 onClick={() => setIsSolutionOpen(false)}
-                className="w-9 h-9 rounded-xl nm-inset-sm flex items-center justify-center"
+                className="w-9 h-9 rounded-md nm-inset-sm flex items-center justify-center"
                 aria-label="Close solution popup"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="nm-inset-sm rounded-2xl p-4 md:p-5 max-h-[60vh] overflow-auto">
+            <div className="nm-inset-sm rounded-lg p-4 md:p-5 max-h-[60vh] overflow-auto">
               <pre className="text-sm leading-6 whitespace-pre-wrap font-mono">{solution}</pre>
             </div>
           </div>

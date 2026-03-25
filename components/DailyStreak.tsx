@@ -51,7 +51,7 @@ export default function DailyStreak() {
 
   return (
     <div className="nm-flat rounded-full px-8 py-5 flex items-center gap-4 group hover:scale-105 transition-transform duration-300">
-      <div className={`p-3 rounded-2xl nm-inset-sm transition-colors duration-500 ${streak > 0 ? 'text-orange-500' : 'text-slate-400'}`}>
+      <div className={`p-3 rounded-lg nm-inset-sm transition-colors duration-500 ${streak > 0 ? 'text-orange-500' : 'text-slate-400'}`}>
         <Flame className={`w-8 h-8 ${streak > 0 ? 'animate-bounce' : ''}`} fill={streak > 0 ? "currentColor" : "none"} />
       </div>
       <div>

@@ -57,7 +57,7 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
                     ))}
                   </div>
                 ) : (
-                  <div className="flex-1 rounded-4xl nm-inset p-10 flex flex-col items-center justify-center text-center">
+                  <div className="flex-1 rounded-lg nm-inset p-10 flex flex-col items-center justify-center text-center">
                     <p className="opacity-80 font-bold text-(--heading-color)">No examples added yet.</p>
                     <p className="opacity-50 text-sm mt-2 max-w-xs">You can add coding problem links here and check them off as you complete them.</p>
                   </div>

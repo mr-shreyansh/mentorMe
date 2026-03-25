@@ -124,7 +124,7 @@ function SystemNode({ id, data }: NodeProps<SystemFlowNode>) {
   const hasModeControl = data.kind === 'microservice';
 
   return (
-    <div className={`nm-flat-sm rounded-2xl border px-3 py-2 min-w-52 ${cardToneByKind[data.kind]}`}>
+    <div className={`nm-flat-sm rounded-lg border px-3 py-2 min-w-52 ${cardToneByKind[data.kind]}`}>
       <div className="flex items-center justify-between gap-3">
         <p className="text-xs font-semibold tracking-wide text-(--heading-color)">{data.label}</p>
         <div className="flex gap-1">
@@ -341,27 +341,27 @@ export default function SystemDesignCanvas() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 pb-12">
-      <section className="nm-flat rounded-4xl p-5">
+      <section className="nm-flat rounded-lg p-5">
         <div className="flex flex-wrap items-center gap-3">
           <span className="text-sm font-semibold text-(--heading-color) mr-2">Add node:</span>
-          <button className="nm-button rounded-xl px-3 py-2 text-sm" type="button" onClick={() => addNode('client')}>
+          <button className="nm-button rounded-md px-3 py-2 text-sm" type="button" onClick={() => addNode('client')}>
             Client
           </button>
-          <button className="nm-button rounded-xl px-3 py-2 text-sm" type="button" onClick={() => addNode('loadBalancer')}>
+          <button className="nm-button rounded-md px-3 py-2 text-sm" type="button" onClick={() => addNode('loadBalancer')}>
             Load Balancer
           </button>
-          <button className="nm-button rounded-xl px-3 py-2 text-sm" type="button" onClick={() => addNode('microservice')}>
+          <button className="nm-button rounded-md px-3 py-2 text-sm" type="button" onClick={() => addNode('microservice')}>
             Backend Microservice
           </button>
-          <button className="nm-button rounded-xl px-3 py-2 text-sm" type="button" onClick={() => addNode('redis')}>
+          <button className="nm-button rounded-md px-3 py-2 text-sm" type="button" onClick={() => addNode('redis')}>
             Redis Cache
           </button>
-          <button className="nm-button rounded-xl px-3 py-2 text-sm" type="button" onClick={() => addNode('database')}>
+          <button className="nm-button rounded-md px-3 py-2 text-sm" type="button" onClick={() => addNode('database')}>
             Database
           </button>
 
           <button
-            className="nm-button rounded-xl px-3 py-2 text-sm ml-auto"
+            className="nm-button rounded-md px-3 py-2 text-sm ml-auto"
             type="button"
             onClick={validateDesign}
             disabled={isValidating}
@@ -371,7 +371,7 @@ export default function SystemDesignCanvas() {
         </div>
       </section>
 
-      <section className="nm-flat rounded-4xl p-3 h-[70vh] min-h-130">
+      <section className="nm-flat rounded-lg p-3 h-[70vh] min-h-130">
         <ReactFlow<SystemFlowNode, Edge>
           fitView
           nodes={nodes}
@@ -387,7 +387,7 @@ export default function SystemDesignCanvas() {
         </ReactFlow>
       </section>
 
-      <section className="nm-flat rounded-4xl p-5">
+      <section className="nm-flat rounded-lg p-5">
         <h2 className="text-lg font-bold text-(--heading-color)">Validation Results</h2>
         <p className="text-sm opacity-70 mt-1">
           Frontend payload is ready. Set a URL in the validation integration block to enable API checks.
@@ -402,7 +402,7 @@ export default function SystemDesignCanvas() {
         ) : (
           <ul className="mt-3 space-y-2">
             {validationIssues.map((issue) => (
-              <li key={issue.id} className="nm-inset-sm rounded-xl px-3 py-2 text-sm">
+              <li key={issue.id} className="nm-inset-sm rounded-md px-3 py-2 text-sm">
                 <p className={issue.severity === 'error' ? 'text-red-500' : 'text-amber-500'}>{issue.severity.toUpperCase()}</p>
                 <p className="mt-1">{issue.message}</p>
                 <p className="mt-1 opacity-70 text-xs">
