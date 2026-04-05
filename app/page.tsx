@@ -5,7 +5,7 @@ import PlatformsDashboard from "@/components/PlatformsDashboard";
 import { BookOpen, Code2, Terminal } from "lucide-react";
 import { createClient } from "@/app/utils/supabase/server";
 import { cookies } from "next/headers";
-import LoginButton from "@/components/auth/LoginButton";
+
 import {
   getCodeforcesUserInfo,
   getUpcomingCodeforcesContests,
@@ -50,53 +50,57 @@ export default async function Home() {
     }
   }
   return (
-    <div className="space-y-12 animate-in fade-in duration-700 pb-20">
-      <section className="flex justify-start">
-        <LoginButton
-          returnTo="/"
-          isLoggedIn={!!user}
-          userLabel={
-            (user?.user_metadata?.user_name as string | undefined) ??
-            user?.email ??
-            undefined
-          }
-        />
-      </section>
+    <div className="space-y-8 animate-in fade-in duration-700 pb-20 max-w-6xl mx-auto">
+      {/* Top Row: Welcome & Steak Widget */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 nm-flat rounded-2xl p-8 flex flex-col justify-center relative overflow-hidden">
+          <div className="absolute -top-10 -right-10 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-(--heading-color) mb-3 transition-colors">
+              Welcome back, {user?.user_metadata?.user_name || "Developer"}
+            </h1>
+            <p className="opacity-70 text-foreground max-w-md text-sm leading-relaxed">
+              Consistency is key. Track your practice progress, build your streak, and improve your ranking across multiple coding platforms.
+            </p>
+          </div>
+        </div>
 
-      <div className="flex flex-col lg:flex-row gap-8 items-start">
-        <header className="flex-1 p-8 md:p-12 nm-flat rounded-5xl w-full">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-(--heading-color) mb-4">
-            Welcome back, Developer
-          </h1>
-          <p className="opacity-70 text-lg max-w-2xl text-foreground">
-            Consistency is key. Here is your recent practice overview and your
-            platforms hubs.
-          </p>
-        </header>
-        <div className="w-full lg:w-auto shrink-0 self-center lg:self-start">
+        <div className="lg:col-span-1 nm-inset rounded-2xl p-6 flex flex-col items-center justify-center">
           <DailyStreak />
         </div>
       </div>
 
-      <section>
-        <ActivityHeatmap />
-      </section>
+      {/* Middle Row: Heatmap & Platforms */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        <div className="xl:col-span-2 nm-flat rounded-2xl p-6">
+          <ActivityHeatmap />
+        </div>
+        <div className="xl:col-span-1 rounded-2xl p-0 h-full">
+          <PlatformsDashboard
+            codeforcesUser={codeforcesUser}
+            codeforcesContests={codeforcesContests}
+            githubUsername={githubUsername}
+            leetcodeUser={leetcodeUser}
+          />
+        </div>
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <section className="lg:col-span-2 pt-4">
-          <h2 className="text-2xl font-bold mb-8 flex items-center text-(--heading-color)">
-            <span className="nm-flat-sm text-orange-500 p-3 rounded-lg mr-5">
-              <BookOpen className="w-6 h-6" />
-            </span>
-            Learning Hubs
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Link href="/dsa" className="block group">
-              <div className="h-full nm-button rounded-lg p-8 transition-all duration-300">
-                <div className="nm-inset-sm w-16 h-16 rounded-lg flex items-center justify-center mb-6 text-orange-500">
-                  <Code2 className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-(--heading-color)">
+      {/* Bottom Row: Learning Hubs / Study Plans */}
+      <div className="pt-4">
+        <h2 className="text-xl font-bold mb-6 flex items-center text-(--heading-color)">
+          <span className="text-orange-500 mr-3">
+            <BookOpen className="w-5 h-5" />
+          </span>
+          Study Plans
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Link href="/dsa" className="block group">
+            <div className="h-full nm-button rounded-2xl p-6 transition-all duration-300 flex items-start gap-4 hover:scale-[1.01]">
+              <div className="nm-inset w-12 h-12 rounded-xl flex items-center justify-center text-orange-500 shrink-0 shadow-inner">
+                <Code2 className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-1 text-(--heading-color) group-hover:text-orange-500 transition-colors">
                   Data Structures & Algorithms
                 </h3>
                 <p className="opacity-70 text-sm leading-relaxed text-foreground">
@@ -104,14 +108,16 @@ export default async function Home() {
                   problems, subtopics, and dynamic pseudocode snippets.
                 </p>
               </div>
-            </Link>
+            </div>
+          </Link>
 
-            <Link href="/system-design" className="block group">
-              <div className="h-full nm-button rounded-lg p-8 transition-all duration-300">
-                <div className="nm-inset w-16 h-16 rounded-lg flex items-center justify-center mb-6 text-orange-500">
-                  <Terminal className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-(--heading-color)">
+          <Link href="/system-design" className="block group">
+            <div className="h-full nm-button rounded-2xl p-6 transition-all duration-300 flex items-start gap-4 hover:scale-[1.01]">
+              <div className="nm-inset w-12 h-12 rounded-xl flex items-center justify-center text-orange-500 shrink-0 shadow-inner">
+                <Terminal className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-1 text-(--heading-color) group-hover:text-orange-500 transition-colors">
                   System Design
                 </h3>
                 <p className="opacity-70 text-sm leading-relaxed text-foreground">
@@ -119,18 +125,9 @@ export default async function Home() {
                   validate architecture connectivity.
                 </p>
               </div>
-            </Link>
-          </div>
-        </section>
-
-        <section className="pt-4">
-          <PlatformsDashboard
-            codeforcesUser={codeforcesUser}
-            codeforcesContests={codeforcesContests}
-            githubUsername={githubUsername}
-            leetcodeUser={leetcodeUser}
-          />
-        </section>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );

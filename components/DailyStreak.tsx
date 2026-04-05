@@ -50,14 +50,14 @@ export default function DailyStreak() {
   if (!isMounted) return <div className="h-20 w-48 nm-flat rounded-full animate-pulse"></div>;
 
   return (
-    <div className="nm-flat rounded-full px-8 py-5 flex items-center gap-4 group hover:scale-105 transition-transform duration-300">
+    <div className="w-full h-full flex items-center justify-center gap-6 group">
       <div className={`p-3 rounded-lg nm-inset-sm transition-colors duration-500 ${streak > 0 ? 'text-orange-500' : 'text-slate-400'}`}>
         <Flame className={`w-8 h-8 ${streak > 0 ? 'animate-bounce' : ''}`} fill={streak > 0 ? "currentColor" : "none"} />
       </div>
       <div>
         <div className="text-sm font-bold opacity-50 uppercase tracking-widest">Day Streak</div>
         <div className="text-3xl font-black text-(--heading-color)">
-          {streak} <span className="text-lg opacity-50">days</span>
+          {streak} <span className="text-sm opacity-50 font-bold">days</span>
         </div>
       </div>
     </div>

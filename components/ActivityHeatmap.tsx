@@ -61,10 +61,10 @@ export default function ActivityHeatmap() {
   const isDark = theme === 'dark' || (!theme && typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   return (
-    <div className="nm-flat rounded-[3rem] p-8 md:p-12 relative overflow-hidden">
-      <h2 className="text-2xl font-bold mb-8 flex items-center text-[var(--heading-color)]">
-        <span className="nm-inset-sm text-orange-500 p-3 rounded-lg mr-5">
-          <Flame className="w-6 h-6" />
+    <div className="w-full flex-1 flex flex-col justify-center">
+      <h2 className="text-xl font-bold mb-6 flex items-center text-(--heading-color)">
+        <span className="text-orange-500 mr-3">
+          <Flame className="w-5 h-5" />
         </span>
         Consistency Progress
       </h2>

@@ -66,10 +66,10 @@ export default function PlatformsDashboard({
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-right-10 duration-700">
-      <h2 className="text-2xl font-bold flex items-center text-(--heading-color)">
-        <span className="nm-inset-sm text-orange-500 p-3 rounded-lg mr-5">
-          <Trophy className="w-6 h-6" />
+    <div className="w-full h-full flex flex-col">
+      <h2 className="text-xl font-bold mb-6 flex items-center text-(--heading-color)">
+        <span className="text-orange-500 mr-3">
+          <Trophy className="w-5 h-5" />
         </span>
         Profiles & Contests
       </h2>

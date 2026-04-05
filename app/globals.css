@@ -8,47 +8,49 @@
 }
 
 :root {
-  /* Vibrant Light Theme Neumorphism */
-  --bg-color: #f1f5f9; /* Slate 100 */
+  /* Refined Light Theme Soft UI */
+  --bg-color: #f8fafc; /* Slate 50 */
   --text-color: #475569; /* Slate 600 */
   --heading-color: #0f172a; /* Slate 900 */
-  --nm-shadow: 6px 6px 14px #cbd5e1, -6px -6px 14px #ffffff;
-  --nm-shadow-sm: 3px 3px 8px #cbd5e1, -3px -3px 8px #ffffff;
-  --nm-inset: inset 6px 6px 14px #cbd5e1, inset -6px -6px 14px #ffffff;
-  --nm-inset-sm: inset 3px 3px 8px #cbd5e1, inset -3px -3px 8px #ffffff;
-  --nm-active: inset 2px 2px 5px #cbd5e1, inset -2px -2px 5px #ffffff;
+  --nm-shadow: 3px 3px 10px #e2e8f0, -3px -3px 10px #ffffff;
+  --nm-shadow-sm: 1px 1px 4px #e2e8f0, -1px -1px 4px #ffffff;
+  --nm-inset: inset 3px 3px 8px #e2e8f0, inset -3px -3px 8px #ffffff;
+  --nm-inset-sm: inset 1px 1px 3px #e2e8f0, inset -1px -1px 3px #ffffff;
+  --nm-active: inset 2px 2px 5px #e2e8f0, inset -2px -2px 5px #ffffff;
 }
 
 :root[class~="dark"] {
-  /* Vibrant Dark Theme Neumorphism */
-  --bg-color: #0f172a; /* Slate 900 */
+  /* Refined Dark Theme Soft UI */
+  --bg-color: #0c1222; /* Sleek Dark Nav Blue */
   --text-color: #94a3b8; /* Slate 400 */
   --heading-color: #f8fafc; /* Slate 50 */
-  --nm-shadow: 6px 6px 14px #090e1a, -6px -6px 14px #15203a;
-  --nm-shadow-sm: 3px 3px 8px #090e1a, -3px -3px 8px #15203a;
-  --nm-inset: inset 6px 6px 14px #090e1a, inset -6px -6px 14px #15203a;
-  --nm-inset-sm: inset 3px 3px 8px #090e1a, inset -3px -3px 8px #15203a;
-  --nm-active: inset 2px 2px 5px #090e1a, inset -2px -2px 5px #15203a;
+  --nm-shadow: 3px 3px 10px #060911, -3px -3px 10px #121b33;
+  --nm-shadow-sm: 1px 1px 4px #060911, -1px -1px 4px #121b33;
+  --nm-inset: inset 3px 3px 8px #060911, inset -3px -3px 8px #121b33;
+  --nm-inset-sm: inset 1px 1px 3px #060911, inset -1px -1px 3px #121b33;
+  --nm-active: inset 2px 2px 5px #060911, inset -2px -2px 5px #121b33;
 }
 
 body {
   background-color: var(--bg-color);
   background-image: 
-    radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.08) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.06) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
   background-attachment: fixed;
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Neumorphic Utilities */
+/* Base Utility Wrappers to keep professional look */
 .nm-flat {
   box-shadow: var(--nm-shadow);
   background-color: var(--bg-color);
+  border: 1px solid rgba(148, 163, 184, 0.05); /* very subtle edge border */
 }
 .nm-flat-sm {
   box-shadow: var(--nm-shadow-sm);
   background-color: var(--bg-color);
+  border: 1px solid rgba(148, 163, 184, 0.05);
 }
 .nm-inset {
   box-shadow: var(--nm-inset);
@@ -61,10 +63,12 @@ body {
 .nm-button {
   box-shadow: var(--nm-shadow-sm);
   background-color: var(--bg-color);
+  border: 1px solid rgba(148, 163, 184, 0.05);
   transition: all 0.2s ease;
 }
 .nm-button:active {
   box-shadow: var(--nm-active);
+  transform: translateY(1px);
 }
 
 /* ── Blog Content Prose ────────────────────────────────── */
