@@ -17,17 +17,20 @@ export async function simulateCircuitServer(jsxString: string) {
     fs.writeFileSync(jsxPath, jsxString, "utf8");
 
     const runnerPath = path.join(process.cwd(), "scripts", "tscircuit-runner.mjs");
-    const { stdout, stderr } = await execFileAsync(process.execPath, [runnerPath, jsxPath]);
+    const { stdout } = await execFileAsync(process.execPath, [runnerPath, jsxPath]);
 
-    if (stderr && !stdout) {
-      console.error("SPICE Evaluation Script Stderr:", stderr);
+    const result = JSON.parse(stdout.trim());
+
+    if (!result.success) {
+      return {
+        success: false,
+        error: result.error || "Unknown evaluation error"
+      };
     }
-    
-    const circuitObj = JSON.parse(stdout.trim());
 
     return {
       success: true,
-      data: circuitObj
+      data: result.data
     };
   } catch (error: any) {
     console.error("SPICE Evaluation Execution Error:", error);

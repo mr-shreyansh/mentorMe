@@ -12,10 +12,10 @@ const jsxContent = fs.readFileSync(jsxPath, "utf8");
 
 try {
   const circuitObj = await runTscircuitCode(jsxContent);
-  console.log(JSON.stringify(circuitObj));
+  console.log(JSON.stringify({ success: true, data: circuitObj }));
   process.exit(0);
 } catch (err) {
   const message = err instanceof Error ? err.message : "Failed to evaluate circuit JSX";
-  console.error(message);
+  console.log(JSON.stringify({ success: false, error: message }));
   process.exit(1);
 }
