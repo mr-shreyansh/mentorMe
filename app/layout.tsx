@@ -8,6 +8,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { createClient } from "@/app/utils/supabase/server";
 import { cookies } from "next/headers";
 import LoginButton from "@/components/auth/LoginButton";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +44,7 @@ export default async function RootLayout({
     >
       <body className="flex h-screen bg-background text-foreground font-sans overflow-hidden">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Toaster theme="system" position="top-right" richColors />
           <ProgressProvider>
             
             {/* Sidebar for Desktop */}

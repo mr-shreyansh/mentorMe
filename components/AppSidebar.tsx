@@ -9,7 +9,8 @@ import {
   ChevronDown,
   BookOpen,
   MonitorPlay,
-  Briefcase
+  Briefcase,
+  Zap
 } from "lucide-react";
 import { useState } from "react";
 
@@ -24,11 +25,17 @@ export default function AppSidebar() {
   const [activeDomain, setActiveDomain] = useState(domains[0]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const navLinks = [
+  const coreNavLinks = [
     { href: "/", label: "Dashboard", icon: Home },
     { href: "/dsa", label: "Data Structures", icon: Code2 },
     { href: "/system-design", label: "System Design", icon: TerminalSquare },
   ];
+
+  const analogNavLinks = [
+    { href: "/learn/half-wave-rectifier", label: "Half-Wave Rectifier", icon: Zap },
+  ];
+
+  const navLinks = activeDomain.id === "analog" ? analogNavLinks : coreNavLinks;
 
   const comingSoonLinks = [
     { label: "Discover", icon: BookOpen },
