@@ -5,6 +5,7 @@ import { promisify } from "util";
 import fs from "fs";
 import path from "path";
 import os from "os";
+import "@tscircuit/eval";
 
 const execFileAsync = promisify(execFile);
 
